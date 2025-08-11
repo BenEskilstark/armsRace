@@ -1,0 +1,3 @@
+
+  - Need more succinct way to access dispatch, getState, etc. from within html
+
