@@ -1,3 +1,5 @@
+import { cardReducer } from "./cardReducer.js";
+import { shuffle } from '../utils/deck.js';
 
 export const rootReducer = (state, action) => {
     if (state === undefined) state = initState();
@@ -8,7 +10,7 @@ export const rootReducer = (state, action) => {
         case 'DRAW': {
             const { hand, deck } = state;
             const card = deck.shift();
-            return { ...state, hand: [card, ...hand], deck };
+            return { ...state, hand: [...hand, card], deck };
         }
         case 'SELECT': {
             const { id } = action;
@@ -20,13 +22,13 @@ export const rootReducer = (state, action) => {
         case 'PLAY': {
             const { id } = action;
             let { hand, deck } = state;
-            hand = hand.filter(c => c.id != id);
 
             const card = hand.filter(c => c.id == id)[0];
+            for (const effect of card.effects) {
+                state = cardReducer(state, effect);
+            }
 
-
-
-            return { ...state, hand };
+            return { ...state, hand: hand.filter(c => c.id != id) };
         }
         default:
             return state;
@@ -36,14 +38,36 @@ export const rootReducer = (state, action) => {
 export const initState = () => {
     return {
         turn: 0,
-        deck: [
-            { id: 0, name: "Ace", text: "lorem ipsum", color: "steelblue" },
-            { id: 1, name: "Jack", text: "foo bar baz", color: "steelblue" },
-            { id: 2, name: "King", text: "some description", color: "steelblue" },
-            { id: 3, name: "Queen", text: "some much longer description", color: "steelblue" },
-        ],
+        deck: shuffle([
+            {
+                id: 0, name: "City", color: "steelblue",
+                text: "Build a City", effects: [
+                    { type: "MAKE_CITY", text: "Build a City" }
+                ],
+            },
+            {
+                id: 1, name: "Factory", color: "steelblue",
+                text: "foo bar baz", effects: [
+                    { type: "", text: "" }
+                ],
+            },
+            {
+                id: 2, name: "King", color: "steelblue",
+                text: "some description", effects: [
+                    { type: "", text: "" }
+                ],
+            },
+            {
+                id: 3, name: "Queen", color: "steelblue",
+                text: "some much longer description", effects: [
+                    { type: "", text: "" }
+                ],
+            },
+        ]),
         hand: [],
         card: null,
+
+        cities: 0,
     };
 }
 

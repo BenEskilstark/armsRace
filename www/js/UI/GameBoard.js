@@ -31,6 +31,8 @@ const cardTemplate = (card, i, len, isSelected) => {
 export default class GameBoard extends StatefulHTML {
     connectedCallback() {
         this.render(this.getState());
+        window.getState = this.getState;
+        window.dispatch = this.dispatch;
     }
 
     render({ deck, hand, card }) {
