@@ -11,8 +11,8 @@ game-board {
     display: block;
     position: relative;
     background-color: tan;
-    width: 600;
-    height: 600;
+    width: 733;
+    height: 733;
     border: 1px solid black;
 }
 
@@ -29,8 +29,6 @@ game-board {
     width: 80%;
     background-color: white;
     height: 250px;
-    display: flex;
-    gap: 10px;
 }
 
 .deck {
@@ -55,15 +53,19 @@ game-board {
     border: 1px solid black;
     border-radius: 5px;
     padding: 4px;
-    top: -80px;
-    width: 140px;
-    height: 280px;
+    width: 120px;
+    height: 240px;
 }
 
 .card:hover {
     border: 1px solid black;
-    top: -80px;
+    /* top: -80px;
     width: 140px;
-    height: 280px;
+    height: 280px; */
     /* z-index: 20 !important; */
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
 }

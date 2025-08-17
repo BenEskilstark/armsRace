@@ -1,3 +1,8 @@
-
-  - Need more succinct way to access dispatch, getState, etc. from within html
-
+- cards draggable anywhere
+  - with css transform
+  - coming from a deck
+  - system for tracking where they should be in your hand
+- collision detection
+- cities with nodes for factories
+- deck builder/uploader
+  - make all the cards
